@@ -1,0 +1,110 @@
+.charbox{
+
+    font-family: monospace;
+    
+    display: inline-block;
+    
+    width: 1ch;
+    height: 2ch;
+
+    min-width: 1ch;
+    max-width: 1ch;
+
+    min-height: 2ch;
+    max-height: 2ch;
+
+    padding: 0;
+    margin: 0;
+
+    border: 1pt;
+}
+
+#inputFile{
+
+    height: 10%;
+}
+
+#fileContents{
+
+    position: absolute;
+    
+    top: 10%;
+    left: 0;
+    width: 50%;
+    height: 100%;
+}
+
+
+#tooltipLayer{
+
+    position: absolute;
+
+    top: 10%;
+    left: 0;
+    width: 0;
+    height: 0;
+}
+
+.tooltip{
+
+    font-family: monospace;
+
+    background-color: lightgreen;
+
+    position: absolute;
+}
+
+#tripleStore{
+
+    top: 0;
+    left: 50%;
+    
+    width: 50%;
+    height: 100%;
+
+    position: fixed;
+
+    background-color: #efefef;
+
+}
+
+.lexeme{
+
+    display: inline-block;
+}
+
+.unfocused{
+
+    background-color: transparent;
+}
+
+.referent{
+
+    background-color: #ffbb32;
+}
+
+.clickhighlight{
+
+    background-color: #ffe683;
+}
+
+.subjectfocus{
+
+    background-color: #db6f59;
+}
+
+.objectfocus{
+
+    background-color: #5991db;
+}
+
+.relationfocus{
+
+    background-color: #69b56c;
+}
+
+.jsonTreeView{
+
+    margin-left: 32pt;
+    display: block;
+}
