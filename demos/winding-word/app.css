@@ -1,0 +1,60 @@
+#buildinfo{
+
+    font-family: monospace;
+    font-size: 10pt;
+}
+
+.textloader{
+
+    width: 180px;
+    height: 40px;
+
+    padding-left: 40px;
+    padding-top: 20px;
+
+    background-color: #767fe6;
+
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+}
+
+.jsondownloader{
+
+    width: 180px;
+    height: 40px;
+
+    padding-left: 40px;
+    padding-top: 20px;
+
+    background-color: red;
+
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+}
+
+.wordBox{
+
+    display: inline;
+    white-space: pre;
+}
+
+.charBox{
+
+    display: inline;
+    white-space: pre;
+    width: 1em;
+
+    font-family: monospace;
+}
+
+.cursor{
+
+    background-color: lightgreen;
+}
+
+.mark{
+
+    background-color: orange;
+}
