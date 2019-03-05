@@ -344,6 +344,34 @@ class Verse{
 	    textLineEnds );
     }
 }
+class TextSlice{
+
+    get length(){
+
+	return this.end - this.start;
+    }
+
+    get isValid(){
+
+	return "number" === typeof this.start
+	    && "number" === typeof this.end;
+    }
+
+    get isClosed(){
+
+	return "number" === typeof this.start
+	    && "number" === typeof this.end
+	    && 0 <= this.start
+	    && 0 <= this.end;
+    }
+
+    constructor( start, end ){
+
+	this.start = Math.min( start, end )
+	this.end = Math.max( start, end )
+    }
+}
+
 class CharBox{
 
     get innerText(){
@@ -353,27 +381,22 @@ class CharBox{
 
     setCursor(){
 
-	this.element.classList.add( "cursor" );
+	this.element.id = "cursor";
     }
 
     clearCursor(){
 
-	this.element.classList.remove( "cursor" );
+	this.element.id = null;
     }
 
-    setHighlight(){
+    setHighlight( type="text" ){
 
-	this.element.classList.add( "mark" );
+	this.element.classList.add( type + "Mark" );
     }
 
-    clearHighlight(){
+    clearHighlight( type="text" ){
 
-	this.element.classList.remove( "mark" );
-    }
-
-    toggleHighlight(){
-
-	this.element.classList.toggle( "mark" );
+	this.element.classList.remove( type + "Mark" );
     }
 
     constructor( c ){
@@ -500,6 +523,16 @@ class PageBox{
 	return line;
     }
 
+    textSlice( start, end ){
+
+	if( 0 > start || this.lastPos < end ){
+
+	    return null;
+	}
+
+	return this.text.slice( start, end ).join( "" );
+    }
+
     charBoxAt( line, col ){
 
 	return this.charBoxes[ this.charPos( line, col ) ];
@@ -515,10 +548,9 @@ class PageBox{
 	    return [];
 	}
 
-	var start = Math.min( ix1, ix2 );
-	var end = Math.max( ix1, ix2 );
+	var slice = new TextSlice( ix1, ix2 );
 
-	return this.charBoxes.slice( start, end + 1 );
+	return this.charBoxes.slice( slice.start, slice.end + 1 );
     }
 
     constructor( lexerOutput ){
@@ -724,11 +756,11 @@ class TextPage{
 
 	    if( this.markStartPos <= pos ){
 
-		this.pageBox.charBoxes[ pos ].setHighlight();
+		this.highlightChar( pos );
 	    }
 	    else{
 
-		this.pageBox.charBoxes[ pos ].clearHighlight();
+		this.clearChar( pos );
 	    }
 	}
 
@@ -779,23 +811,56 @@ class TextPage{
 
 	    if( this.markStartPos > pos ){
 
-		this.pageBox.charBoxes[ pos ].setHighlight();
+		this.highlightChar( pos );
 	    }
 	    else{
 
-		this.pageBox.charBoxes[ pos ].clearHighlight();
+		this.clearChar( pos );
 	    }
 	}
 
 	this.markEndPos = Math.max( this.markEndPos - count, 0 );
     }
 
-    setMark(){
+    highlightChar( pos ){
+
+	this.pageBox.charBoxes[ pos ]
+	    .setHighlight( this.markType );
+    }
+
+    clearChar( pos, markType=null ){
+
+	if( null === markType ){
+
+	    var markType = this.markType;
+	}
+
+	this.pageBox.charBoxes[ pos ]
+	    .clearHighlight( markType );
+    }
+
+    setMark( type="text" ){
 
 	this.markLine = this.cursorLine;
 	this.markCol = this.cursorCol;
 
+	this.markType = type;
+
 	this.markEndPos = this.markStartPos;
+
+	this.activeMarks[ type ] = {
+
+	    "start": this.markStartPos,
+	    "end": null
+	};
+    }
+
+    unsetMark(){
+
+	this.activeMarks[ this.markType ][ "end" ] =
+	    this.markEndPos;
+
+	this.clearMark();
     }
 
     clearMark(){
@@ -803,14 +868,16 @@ class TextPage{
 	this.markLine = null;
 	this.markCol = null;
 
+	this.markType = null;
 	this.markEndPos = null;
     }
 
     get markedText(){
 
-	return this.pageBox.text.slice(
-	    Math.min( this.markStartPos, this.markEndPos ),
-	    Math.max( this.markStartPos, this.markEndPos ) );
+	var slice =
+	    new TextSlice( this.markStartPos, this.markEndPos );
+
+	return this.pageBox.textSlice( slice.start, slice.end );
     }
 
     persistMarks(){
@@ -820,23 +887,52 @@ class TextPage{
 	    return;
 	}
 
-	this.onpersist( this.markedText.join( "" ) );
+	var output = {};
+	this.markTypes.forEach( t => {
+
+	    var slice = new TextSlice(
+		this.activeMarks[ t ].start,
+		this.activeMarks[ t ].end );
+
+	    if( slice.isClosed ){
+
+		output[ t ] =
+		    this.pageBox.textSlice(
+			slice.start, slice.end );
+	    }
+	} );
+
+	this.onpersist( output );
 	this.clearAll();
+    }
+
+    get markTypes(){
+
+	return Object.keys( this.activeMarks );
     }
 
     clearAll(){
 
-	var startPos =
-	    Math.min( this.markStartPos, this.markEndPos );
+	this.markTypes.forEach( t => {
 
-	var endPos =
-	    Math.max( this.markStartPos, this.markEndPos );
+	    var slice = new TextSlice(
+		    this.activeMarks[ t ].start,
+		    this.activeMarks[ t ].end );
 
-	for( var pos = startPos; pos <= endPos; ++pos ){
+	    if( slice.isValid ){
 
-	    this.pageBox.charBoxes[ pos ].clearHighlight();
-	}
+		for( var pos = slice.start;
+		     pos <= slice.end; ++pos ){
+
+		    this.clearChar( pos, t );
+		}
+	    }
+
+	} );
+
 	this.clearMark();
+
+	this.activeMarks = {};
     }
 
     constructor( text, lineLength=60 ){
@@ -856,7 +952,10 @@ class TextPage{
 	this.markLine = null;
 	this.markCol = null;
 
+	this.markType = null;
 	this.markEndPos = null;
+
+	this.activeMarks = {};
 
 	this.onpersist = null;
 	this._highlightedText = [];
@@ -1009,8 +1108,13 @@ var keyMap = {
     "s": "moveDown",
     "a": "moveLeft",
     "d": "moveRight",
+
     "m": "setMark",
-    "n": "clearMark",
+    "u": "setSubject",
+    "i": "setRelation",
+    "o": "setObject",
+
+    "n": "unsetMark",
     "Enter": "persistMarks",
     "Escape": "clearAll"
 };
@@ -1022,8 +1126,14 @@ var bindHandlers = function( page ){
 	"moveDown": _ => page.cursorDown(),
 	"moveLeft": _ => page.cursorLeft(),
 	"moveRight": _ => page.cursorRight(),
-	"setMark": _ => page.setMark(),
-	"clearMark": _ => page.clearMark(),
+
+	"setMark": _ => page.setMark( "text" ),
+	"setSubject": _ => page.setMark( "subject" ),
+	"setRelation": _ => page.setMark( "relation" ),
+	"setObject": _ => page.setMark( "object" ),
+
+	"unsetMark": _ => page.unsetMark(),
+
 	"persistMarks": _ => page.persistMarks(),
 	"clearAll": _ => page.clearAll(),
     };
@@ -1066,11 +1176,9 @@ textLoader.onload = text => {
 
     var page = new TextPage( text );
 
-    page.onpersist = text => {
+    page.onpersist = mark => {
 
-	Annotations.marks.push( {
-	    "text": text
-	} );
+	Annotations.marks.push( mark );
     };
 
     var pageHandlers = bindHandlers( page );

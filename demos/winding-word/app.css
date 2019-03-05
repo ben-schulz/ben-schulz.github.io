@@ -49,12 +49,27 @@
     font-family: monospace;
 }
 
-.cursor{
+#cursor{
 
     background-color: lightgreen;
 }
 
-.mark{
+.textMark{
 
     background-color: orange;
+}
+
+.subjectMark{
+
+    background-color: #db6f59;
+}
+
+.relationMark{
+
+    background-color: #69b56c;
+}
+
+.objectMark{
+
+    background-color: #5991db;
 }
