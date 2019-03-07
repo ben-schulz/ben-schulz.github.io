@@ -938,6 +938,19 @@ class TextPage{
 	this.activeMarks[ type ][ "end" ] =
 	    this.markEndPos;
 
+	if( undefined === this.closedMarks[ type ] ){
+
+	    this.closedMarks[ type ] = [];
+	}
+
+	var slice =
+	    new TextSlice( this.markStartPos, this.markEndPos );
+
+	this.closedMarks[ type ].push( {
+	    "start": slice.start,
+	    "end": slice.end
+	} );
+
 	this.clearMark();
     }
 
@@ -968,24 +981,21 @@ class TextPage{
 	var output = {};
 	this.markTypes.forEach( t => {
 
-	    var start = this.activeMarks[ t ].start;
-	    if( null !== this.activeMarks[ t ].end ){
+	    if( null === this.activeMarks[ t ].end ){
 
-		var end = this.activeMarks[ t ].end;
-	    }
-	    else{
-
+		var start = this.activeMarks[ t ].start;
 		var end = this.cursorPos;
-	    }
-	    var slice = new TextSlice( start, end );
 
-	    if( slice.isClosed ){
+		var slice = new TextSlice( start, end );
 
-		output[ t ] = {
+		this.closedMarks[ t ].push( {
 		    "start": slice.start,
 		    "end": slice.end
-		};
+		} );
+
 	    }
+
+	    output[ t ] = this.closedMarks[ t ];
 	} );
 
 	this.onpersist( output );
@@ -1001,31 +1011,19 @@ class TextPage{
 
 	this.markTypes.forEach( t => {
 
-	    var start = this.activeMarks[ t ].start;
-	    if( null !== this.activeMarks[ t ].end ){
+	    this.closedMarks[ t ].forEach( m => {
 
-		var end = this.activeMarks[ t ].end;
-	    }
-	    else{
-
-		var end = this.cursorPos;
-	    }
-	    var slice = new TextSlice( start, end );
-
-	    if( slice.isValid ){
-
-		for( var pos = slice.start;
-		     pos <= slice.end; ++pos ){
+		for( var pos = m.start; pos <= m.end; ++pos ){
 
 		    this.clearChar( pos, t );
 		}
-	    }
-
+	    } );
 	} );
 
 	this.clearMark();
 
 	this.activeMarks = {};
+	this.closedMarks = {};
     }
 
     constructor( text, lineLength=60 ){
@@ -1049,6 +1047,7 @@ class TextPage{
 	this.markEndPos = null;
 
 	this.activeMarks = {};
+	this.closedMarks = {};
 
 	this.onpersist = null;
 	this._highlightedText = [];
@@ -1276,9 +1275,12 @@ textLoader.onload = text => {
 
     var page = new TextPage( text );
 
+    Annotations.original = page.pageBox.text.join( "" );
+    Annotations.created = Date.now();
     page.onpersist = mark => {
 
 	Annotations.marks.push( mark );
+	Annotations.created = Date.now();
     };
 
     var pageHandlers = bindHandlers( page );
