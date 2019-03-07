@@ -902,6 +902,11 @@ class TextPage{
 
     toggleMark( type="text" ){
 
+	if( null !== this.markType && type != this.markType ){
+
+	    return;
+	}
+
 	if( this.markSet ){
 
 	    this.unsetMark( type );
@@ -928,9 +933,9 @@ class TextPage{
 	};
     }
 
-    unsetMark(){
+    unsetMark( type="text" ){
 
-	this.activeMarks[ this.markType ][ "end" ] =
+	this.activeMarks[ type ][ "end" ] =
 	    this.markEndPos;
 
 	this.clearMark();
@@ -963,9 +968,16 @@ class TextPage{
 	var output = {};
 	this.markTypes.forEach( t => {
 
-	    var slice = new TextSlice(
-		this.activeMarks[ t ].start,
-		this.activeMarks[ t ].end );
+	    var start = this.activeMarks[ t ].start;
+	    if( null !== this.activeMarks[ t ].end ){
+
+		var end = this.activeMarks[ t ].end;
+	    }
+	    else{
+
+		var end = this.cursorPos;
+	    }
+	    var slice = new TextSlice( start, end );
 
 	    if( slice.isClosed ){
 
@@ -988,9 +1000,16 @@ class TextPage{
 
 	this.markTypes.forEach( t => {
 
-	    var slice = new TextSlice(
-		    this.activeMarks[ t ].start,
-		    this.activeMarks[ t ].end );
+	    var start = this.activeMarks[ t ].start;
+	    if( null !== this.activeMarks[ t ].end ){
+
+		var end = this.activeMarks[ t ].end;
+	    }
+	    else{
+
+		var end = this.cursorPos;
+	    }
+	    var slice = new TextSlice( start, end );
 
 	    if( slice.isValid ){
 
