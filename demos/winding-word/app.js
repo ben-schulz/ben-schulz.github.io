@@ -382,6 +382,18 @@ class CharBox{
     setCursor(){
 
 	this.element.id = "cursor";
+
+	var rect = this.element.getBoundingClientRect();
+
+	if( 0 >= rect.top ){
+
+	    window.scrollBy( 0, -window.innerHeight + 40 );
+	}
+
+	if( window.innerHeight <= rect.bottom ){
+
+	    window.scrollBy( 0, window.innerHeight - 40 );
+	}
     }
 
     clearCursor(){
@@ -556,6 +568,7 @@ class PageBox{
     constructor( lexerOutput ){
 
 	this.element = document.createElement( "div" );
+	this.element.classList.add( "textReader" );
 
 	this.lines = [];
 	this.lineEnds = [];
@@ -822,6 +835,54 @@ class TextPage{
 	this.markEndPos = Math.max( this.markEndPos - count, 0 );
     }
 
+    wordRight(){
+
+	if( this.cursorCol == this.pageBox.lastPos ){
+
+	    return;
+	}
+
+	this.cursorRight();
+	while( " " == this.cursorText ){
+
+	    this.cursorRight();
+	}
+
+	var prevPos = this.cursorPos - 1;
+	while( this.cursorText != " "
+	       && prevPos != this.cursorPos ){
+
+	    prevPos = this.cursorPos;
+	    this.cursorRight();
+	}
+    }
+
+    wordLeft(){
+
+	if( 0 == this.cursorCol ){
+
+	    return;
+	}
+
+	this.cursorLeft();
+	while( " " == this.cursorText ){
+
+	    this.cursorLeft();
+	}
+
+	var prevPos = this.cursorPos + 1;
+	while( this.cursorText != " "
+	       && prevPos != this.cursorPos ){
+
+	    prevPos = this.cursorPos;
+	    this.cursorLeft();
+	}
+
+	if( 1 < this.cursorPos ){
+	    this.cursorRight();
+	}
+    }
+
     highlightChar( pos ){
 
 	this.pageBox.charBoxes[ pos ]
@@ -837,6 +898,18 @@ class TextPage{
 
 	this.pageBox.charBoxes[ pos ]
 	    .clearHighlight( markType );
+    }
+
+    toggleMark( type="text" ){
+
+	if( this.markSet ){
+
+	    this.unsetMark( type );
+	}
+	else{
+
+	    this.setMark( type );
+	}
     }
 
     setMark( type="text" ){
@@ -1109,12 +1182,14 @@ var keyMap = {
     "a": "moveLeft",
     "d": "moveRight",
 
-    "m": "setMark",
-    "u": "setSubject",
-    "i": "setRelation",
-    "o": "setObject",
+    "q": "wordLeft",
+    "e": "wordRight",
 
-    "n": "unsetMark",
+    "m": "toggleMark",
+    "u": "toggleSubject",
+    "i": "toggleRelation",
+    "o": "toggleObject",
+
     "Enter": "persistMarks",
     "Escape": "clearAll"
 };
@@ -1127,10 +1202,13 @@ var bindHandlers = function( page ){
 	"moveLeft": _ => page.cursorLeft(),
 	"moveRight": _ => page.cursorRight(),
 
-	"setMark": _ => page.setMark( "text" ),
-	"setSubject": _ => page.setMark( "subject" ),
-	"setRelation": _ => page.setMark( "relation" ),
-	"setObject": _ => page.setMark( "object" ),
+	"wordLeft": _ => page.wordLeft(),
+	"wordRight": _ => page.wordRight(),
+
+	"toggleMark": _ => page.toggleMark( "text" ),
+	"toggleSubject": _ => page.toggleMark( "subject" ),
+	"toggleRelation": _ => page.toggleMark( "relation" ),
+	"toggleObject": _ => page.toggleMark( "object" ),
 
 	"unsetMark": _ => page.unsetMark(),
 
@@ -1168,9 +1246,11 @@ var bindKeyboardEvents = function( handlers ){
     );
 };
 
+var controls = document.getElementById( "controlPanel" );
+
 var textLoader = new TextLoader();
 
-document.body.appendChild( textLoader.element );
+controls.appendChild( textLoader.element );
 
 textLoader.onload = text => {
 
@@ -1190,8 +1270,60 @@ textLoader.onload = text => {
 };
 
 
+
 var jsonDownloader = new JsonDownload();
-document.body.appendChild( jsonDownloader.element );
+controls.appendChild( jsonDownloader.element );
 
 jsonDownloader.value = Annotations;
+
+
+var keyLegend = document.createElement( "table" );
+keyLegend.id = "keyLegend";
+
+var makeDocCell = function( key, val ){
+
+    var cell = document.createElement( "td" );
+    cell.style.paddingLeft = "3px";
+    cell.style.paddingRight = "3px";
+    cell.style.paddingTop = "3px";
+    cell.style.paddingBottom = "3px";
+    
+
+    cell.appendChild(
+	document.createTextNode( key + " : " + val ) );
+
+    return cell;
+};
+
+var keys = Object.keys( keyMap )
+for( var ix = 0; ix < keys.length; ix += 3 ){
+
+    var row = document.createElement( "tr" );
+
+    var k0 = keys[ ix ];
+    var cell0 = makeDocCell( k0, keyMap[ k0 ] );
+
+    var k1 = keys[ ix + 1 ];
+    if( undefined === k1 ){
+
+	break;
+    }
+    var cell1 = makeDocCell( k1, keyMap[ k1 ] );
+
+    var k2 = keys[ ix + 2 ];
+    if( undefined === k2 ){
+
+	break;
+    }
+
+    var cell2 = makeDocCell( k2, keyMap[ k2 ] );
+
+    row.appendChild( cell0 );
+    row.appendChild( cell1 );
+    row.appendChild( cell2 );
+    
+    keyLegend.appendChild( row );
+}
+
+document.body.appendChild( keyLegend );
 }());
