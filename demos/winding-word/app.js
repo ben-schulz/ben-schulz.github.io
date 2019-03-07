@@ -1287,7 +1287,6 @@ var makeDocCell = function( key, val ){
     cell.style.paddingRight = "3px";
     cell.style.paddingTop = "3px";
     cell.style.paddingBottom = "3px";
-    
 
     cell.appendChild(
 	document.createTextNode( key + " : " + val ) );
@@ -1321,7 +1320,7 @@ for( var ix = 0; ix < keys.length; ix += 3 ){
     row.appendChild( cell0 );
     row.appendChild( cell1 );
     row.appendChild( cell2 );
-    
+
     keyLegend.appendChild( row );
 }
 
