@@ -12,15 +12,17 @@ body{
 
     position: relative;
     top: 30px;
-    left: 15%;
+    left: 5%;
 
     min-height: 40px;
     min-width: 300px;
+
+    display: inline;
 }
 
 #keyLegend{
 
-    display: block;
+    display: inline;
     font-size: 8pt;
 
     position: relative;
@@ -44,7 +46,7 @@ body{
     width: 180px;
     height: 40px;
 
-    display: inline;
+    display: block;
 
     padding-left: 40px;
     padding-right: 40px;
@@ -60,12 +62,33 @@ body{
     cursor: pointer;
 }
 
+#rereadButton{
+
+    width: 180px;
+    height: 40px;
+
+    display: block;
+
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    background-color: #69b56c;
+
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+
+    cursor: pointer;
+}
+
 .jsondownloader{
 
     width: 180px;
     height: 40px;
 
-    display: inline;
+    display: block;
 
     padding-left: 40px;
     padding-right: 40px;
