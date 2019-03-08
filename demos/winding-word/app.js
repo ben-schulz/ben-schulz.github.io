@@ -380,6 +380,15 @@ class CharBox{
 	return this.element.innerText;
     }
 
+    centerHere(){
+
+	var rect = this.element.getBoundingClientRect();
+
+	var deltaY = ( rect.top - 0.5 * window.innerHeight );
+
+	window.scrollBy( 0, deltaY );
+    }
+
     setCursor(){
 
 	this.element.id = "cursor";
@@ -889,6 +898,11 @@ class TextPage{
 	}
     }
 
+    centerHere(){
+
+	this.cursorBox.centerHere();
+    }
+
     highlightChar( pos ){
 
 	this.pageBox.charBoxes[ pos ]
@@ -1224,6 +1238,8 @@ var keyMap = {
     "q": "wordLeft",
     "e": "wordRight",
 
+    "l": "centerHere",
+
     "m": "toggleMark",
     "u": "toggleSubject",
     "i": "toggleRelation",
@@ -1243,6 +1259,8 @@ var bindHandlers = function( page ){
 
 	"wordLeft": _ => page.wordLeft(),
 	"wordRight": _ => page.wordRight(),
+
+	"centerHere": _ => page.centerHere(),
 
 	"toggleMark": _ => page.toggleMark( "text" ),
 	"toggleSubject": _ => page.toggleMark( "subject" ),
