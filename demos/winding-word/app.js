@@ -412,6 +412,11 @@ class CharBox{
 	this.element.classList.remove( type + "Mark" );
     }
 
+    showPreviouslyHighlighted(){
+
+	this.element.classList.add( "previouslyHighlighted" );
+    }
+
     constructor( c ){
 
 	this.text = c;
@@ -997,9 +1002,23 @@ class TextPage{
 	    }
 
 	    output[ t ] = this.closedMarks[ t ];
+
+	    this.closedMarks[ t ].forEach( m => {
+
+		var start = m.start;
+		var end = m.end;
+
+		for( var pos = start; pos < end; ++pos ){
+
+		    this.pageBox.charBoxes[ pos ]
+			.showPreviouslyHighlighted();
+		}
+	    } );
+
 	} );
 
 	this.onpersist( output );
+
 	this.clearAll();
     }
 
