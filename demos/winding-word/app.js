@@ -983,6 +983,13 @@ class TextPage{
 	this.markEndPos = null;
     }
 
+    highlightInterval( type, start, end ){
+
+	for( var pos = start; pos < end; ++pos ){
+	    this.pageBox.charBoxes[ pos ].setHighlight( type );
+	}
+    }
+
     get markedText(){
 
 	var slice =
@@ -1001,7 +1008,8 @@ class TextPage{
 	var output = {};
 	this.markTypes.forEach( t => {
 
-	    if( null === this.activeMarks[ t ].end ){
+	    if( undefined !== this.activeMarks[ t ]
+		&& null === this.activeMarks[ t ].end ){
 
 		var start = this.activeMarks[ t ].start;
 		var end = this.cursorPos;
@@ -1029,35 +1037,40 @@ class TextPage{
 		}
 	    } );
 
+	    this.closedMarks[ t ] = [];
+	    this.activeMarks[ t ] = {};
 	} );
 
 	this.onpersist( output );
-
-	this.clearAll();
+	this.clearMark();
     }
 
     get markTypes(){
 
-	return Object.keys( this.activeMarks );
+	return [
+
+	    "text",
+	    "subject",
+	    "object",
+	    "relation"
+	];
     }
 
     clearAll(){
 
 	this.markTypes.forEach( t => {
 
-	    this.closedMarks[ t ].forEach( m => {
+	    for( var pos = 0;
+		 pos <= this.pageBox.lastPos; ++pos ){
 
-		for( var pos = m.start; pos <= m.end; ++pos ){
+		this.clearChar( pos, t );
+	    }
 
-		    this.clearChar( pos, t );
-		}
-	    } );
+	    this.closedMarks[ t ] = [];
+	    this.activeMarks[ t ] = {};
 	} );
 
 	this.clearMark();
-
-	this.activeMarks = {};
-	this.closedMarks = {};
     }
 
     constructor( text, lineLength=60 ){
@@ -1082,6 +1095,12 @@ class TextPage{
 
 	this.activeMarks = {};
 	this.closedMarks = {};
+
+	this.markTypes.forEach( t => {
+
+	    this.activeMarks[ t ] = [];
+	    this.closedMarks[ t ] = [];
+	} );
 
 	this.onpersist = null;
 	this._highlightedText = [];
@@ -1220,13 +1239,174 @@ class KeyDispatcher{
 	this._handlers = mapping || {};
     }
 }
-var Annotations = ( function(){
+class Annotation{
 
-    return {
-	"marks":[]
+    updateTimeStamp(){
+
+	this.modified = Date.now();
     }
 
-}() );
+    get currentSubject(){
+
+	return this.marks[ this._markBucket ];
+    }
+
+    pushMarksToCurrent( mark ){
+
+	Object.keys( mark ).forEach( t => {
+
+	    this.pushToCurrent( t, mark[ t ] );
+	} );
+
+	this.updateTimeStamp();
+
+    }
+
+    pushToCurrent( key, value ){
+
+	if( undefined === this.currentSubject[ key ] ){
+
+	    this.currentSubject[ key ] = [];
+	}
+
+	if( !value ){
+
+	    return;
+	}
+
+	value.forEach( x => {
+
+	    var mark = {
+
+		"start": x.start,
+		"end": x.end
+	    };
+
+	    this.currentSubject[ key ].push( mark );
+	} );
+    }
+
+    addSubject(){
+
+	this.marks.push( {} );
+	this._markBucket = this.marks.length - 1;
+    }
+
+    cycleSubject(){
+
+	if( this._markBucket == this.marks.length - 1 ){
+
+	    this._markBucket = 0;
+	}
+	else{
+
+	    this._markBucket += 1;
+	}
+    }
+
+    constructor(){
+
+	this.original = null;
+
+	this._markBucket = 0;
+
+	this.marks = [ {} ];
+
+	this.created = Date.now();
+	this.modified = Date.now();
+    }
+}
+class Reader{
+
+    get markNames(){
+
+	return Object.keys( this.annotations.currentSubject );
+    }
+
+    addSubjectAndRedisplay(){
+
+	this.page.clearAll();
+	this.annotations.addSubject();
+
+    }
+
+    cycleAndRedisplay(){
+
+	this.page.clearAll();
+	this.annotations.cycleSubject();
+
+	this.markNames.forEach( k => {
+
+	    var entries = this.annotations.currentSubject[ k ];
+	    entries.forEach( e => {
+
+		var start = e.start;
+		var end = e.end;
+
+		this.page.highlightInterval( k, start, end );
+	    } );
+	} );
+    }
+
+    bindHandlers(){
+
+	this.actionDispatch = {
+	    "moveUp": _ => this.page.cursorUp(),
+	    "moveDown": _ => this.page.cursorDown(),
+	    "moveLeft": _ => this.page.cursorLeft(),
+	    "moveRight": _ => this.page.cursorRight(),
+
+	    "wordLeft": _ => this.page.wordLeft(),
+	    "wordRight": _ => this.page.wordRight(),
+
+	    "centerHere": _ => this.page.centerHere(),
+
+	    "toggleMark": _ => this.page.toggleMark( "text" ),
+
+	    "toggleSubject": _ => this.page.toggleMark( "subject" ),
+
+	    "toggleRelation": _ => this.page.toggleMark( "relation" ),
+
+	    "toggleObject": _ => this.page.toggleMark( "object" ),
+
+	    "unsetMark": _ => this.page.unsetMark(),
+
+	    "persistMarks": _ => this.page.persistMarks(),
+	    "clearAll": _ => this.page.clearAll(),
+
+	    "cycleSubject": _ => this.cycleAndRedisplay(),
+	    "addSubject": _ => this.addSubjectAndRedisplay()
+	};
+    }
+
+    bindKeys( keyMap ){
+
+	this.keyDispatch = {};
+	Object.keys( keyMap ).forEach( key => {
+
+	    var actionName = keyMap[ key ];
+
+	    this.keyDispatch[ key ] =
+		this.actionDispatch[ actionName ];
+	} );
+    }
+
+    constructor( page, annotations ){
+
+	this.page = page;
+	this.annotations = annotations;
+
+	this.keyDispatch = null;
+	this.actionDispatch = null;
+	this.bindHandlers();
+
+	this.page.onpersist = mark => {
+
+	    annotations.pushMarksToCurrent( mark );
+	};
+    }
+}
+var reader = null;
 
 var keyMap = {
 
@@ -1245,48 +1425,12 @@ var keyMap = {
     "i": "toggleRelation",
     "o": "toggleObject",
 
+    "h": "cycleSubject",
+    "n": "addSubject",
+
     "Enter": "persistMarks",
     "Escape": "clearAll"
 };
-
-var bindHandlers = function( page ){
-
-    return {
-	"moveUp": _ => page.cursorUp(),
-	"moveDown": _ => page.cursorDown(),
-	"moveLeft": _ => page.cursorLeft(),
-	"moveRight": _ => page.cursorRight(),
-
-	"wordLeft": _ => page.wordLeft(),
-	"wordRight": _ => page.wordRight(),
-
-	"centerHere": _ => page.centerHere(),
-
-	"toggleMark": _ => page.toggleMark( "text" ),
-	"toggleSubject": _ => page.toggleMark( "subject" ),
-	"toggleRelation": _ => page.toggleMark( "relation" ),
-	"toggleObject": _ => page.toggleMark( "object" ),
-
-	"unsetMark": _ => page.unsetMark(),
-
-	"persistMarks": _ => page.persistMarks(),
-	"clearAll": _ => page.clearAll(),
-    };
-};
-
-var bindKeys = function( handlers ){
-
-    var result = {};
-    Object.keys( keyMap ).forEach( key => {
-
-	var actionName = keyMap[ key ];
-
-	result[ key ] = handlers[ actionName ];
-    } );
-
-    return result;
-};
-
 
 var bindKeyboardEvents = function( handlers ){
 
@@ -1318,30 +1462,24 @@ textLoader.onload = text => {
     }
 
     var page = new TextPage( text );
+    var annotations = new Annotation();
 
-    Annotations.original = page.pageBox.text.join( "" );
-    Annotations.created = Date.now();
-    page.onpersist = mark => {
+    annotations.original = page.pageBox.text.join( "" );
 
-	Annotations.marks.push( mark );
-	Annotations.created = Date.now();
-    };
-
-    var pageHandlers = bindHandlers( page );
-    var keyHandlers = bindKeys( pageHandlers );
-
-    bindKeyboardEvents( keyHandlers );
+    reader = new Reader( page, annotations );
+    reader.bindKeys( keyMap );
+    bindKeyboardEvents( reader.keyDispatch );
 
     page.element.id = "mainText";
     document.body.appendChild( page.element );
+
+    jsonDownloader.value = reader.annotations;
 };
-
-
 
 var jsonDownloader = new JsonDownload();
 controls.appendChild( jsonDownloader.element );
 
-jsonDownloader.value = Annotations;
+jsonDownloader.value = {};
 
 var rereadButton = new TextLoader( "reread saved markup" );
 rereadButton.element.id = "rereadButton";
@@ -1357,32 +1495,28 @@ rereadButton.onload = markup => {
     }
 
     var obj = JSON.parse( markup );
-    var page = new TextPage( obj.original );
+
+    var annotations = new Annotation();
 
     obj.marks.forEach( m => {
 
-	Object.keys( m ).forEach( k => {
-
-	    var entries = m[ k ];
-	    entries.forEach( e => {
-
-		var start = e.start;
-		var end = e.end;
-
-		for( var pos = start; pos < end; ++pos ){
-		    page.pageBox.charBoxes[ pos ].setHighlight( k );
-		}
-	    } );
-	} );
+	annotations.pushMarksToCurrent( m );
+	annotations.addSubject();
     } );
 
-    var pageHandlers = bindHandlers( page );
-    var keyHandlers = bindKeys( pageHandlers );
+    annotations.original = obj.original;
+    annotations.created = obj.created;
 
-    bindKeyboardEvents( keyHandlers );
+    var page = new TextPage( annotations.original );
+
+    reader = new Reader( page, annotations );
+    reader.bindKeys( keyMap );
+    bindKeyboardEvents( reader.keyDispatch );
 
     page.element.id = "mainText";
     document.body.appendChild( page.element );
+
+    jsonDownloader.value = reader.annotations;
 };
 
 
