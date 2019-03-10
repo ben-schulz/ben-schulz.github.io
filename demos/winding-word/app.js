@@ -389,6 +389,24 @@ class CharBox{
 	window.scrollBy( 0, deltaY );
     }
 
+    topHere(){
+
+	var rect = this.element.getBoundingClientRect();
+
+	var deltaY = ( rect.top - 0.05 * window.innerHeight );
+
+	window.scrollBy( 0, deltaY );
+    }
+
+    bottomHere(){
+
+	var rect = this.element.getBoundingClientRect();
+
+	var deltaY = ( rect.top - 0.95 * window.innerHeight );
+
+	window.scrollBy( 0, deltaY );
+    }
+
     setCursor(){
 
 	this.element.id = "cursor";
@@ -900,7 +918,19 @@ class TextPage{
 
     centerHere(){
 
-	this.cursorBox.centerHere();
+	this._posMode += 1;
+	this._posMode = this._posMode % 3;
+
+	if( 0 == this._posMode ){
+	    this.cursorBox.centerHere();
+	}
+	else if( 1 == this._posMode ){
+
+	    this.cursorBox.topHere();
+	}
+	else{
+	    this.cursorBox.bottomHere();
+	}
     }
 
     highlightChar( pos ){
@@ -1104,6 +1134,8 @@ class TextPage{
 
 	this.onpersist = null;
 	this._highlightedText = [];
+
+	this._posMode = 0;
     }
 }
 var KeyCode = {
