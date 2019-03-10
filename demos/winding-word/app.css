@@ -119,6 +119,11 @@ body{
     font-family: monospace;
 }
 
+.previouslyHighlighted{
+
+    background-color: #f0f08c;
+}
+
 #cursor{
 
     background-color: lightgreen;
@@ -142,9 +147,4 @@ body{
 .objectMark{
 
     background-color: #5991db;
-}
-
-.previouslyHighlighted{
-
-    background-color: #f0f08c;
 }
