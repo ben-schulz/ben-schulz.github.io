@@ -2,16 +2,16 @@ Storytelling is the Fifth Dimension.
 
 Lives are full of stories. They revive the past. They bend the future. They lie, reveal, create, destroy. Every human knows at least a few. Every human lives at least one.
 
-One way to make sense of this fact is to understand stories this way: as a literal dimension that is adjacent to lived experience. I don't mean "dimension" as a metaphor. I also don't mean "dimension" in the mystical, imprecise sense it often has in esoteric spiritual theories. I mean to say that stories comprise an actually existing dimension of things in the same way that forward/backward, left/right, and up/down comprise three spatial dimensions. Admitting time as a fourth dimension, stories become a fifth*.
+One way to make sense of this fact is to understand stories this way: as a literal dimension that is adjacent to lived experience. I don't mean "dimension" as a metaphor. I also don't mean "dimension" in the mystical, imprecise sense it often has in esoteric spiritual theories. I mean to say that stories comprise an actually existing dimension of things in the same way that forward/backward, left/right, and up/down comprise three spatial dimensions. Admitting time as a fourth dimension, stories become a fifth[1].
 
-The key insight is that it is always possible to go from a lower to a higher dimension by introducing _variation through time_. Examples would make this idea concrete, so let's look at a few, and work our way to the conclusion.
+"Stories exist in a fifth dimension" is a claim with a dizzying number of interesting implications. It's also a claim that's highly abstract, and not at all obvious. What I'd like to do here is clarify what that idea means, and give it a basis in concrete fact. I'll start by considering two very large but very familiar things: change, and time.
 
 
 # Adding Dimensions with Time
 
-As used in science and mathematics, "dimension" refers to the number of coordinates needed to uniquely identify a point in some space**. By that definition, a one-dimensional space is one in which every single point can be assigned a unique number. Represented visually, a one-dimensional space could be perfectly flattened out into the number line:
+As used in science and mathematics, "dimension" refers (roughly) to the number of coordinates needed to uniquely identify a point in some space**. By that definition, a one-dimensional space is one in which every single point can be assigned a unique number. Represented visually, a one-dimensional space could be perfectly flattened out into the number line:
 
-[ image of the number line, including at least 0 and 1 ]
+[Figure 0][ image of the number line, from at least -1 to 1 ]
 
 Two important points to note:
 
@@ -20,49 +20,49 @@ Two important points to note:
 
 Suppose one of our points could "experience time", the way a human does. What would that look like? Given that there is nothing beyond the number line, that would mean that there is some point that takes on different values through a sequence of moments. Visually, that means that there would be a distinct point on the line that _moves_:
 
-[ animation of a point moving back and forth between 0 and 1 according to sin( t ) ]
+[Figure 1][ animation of a point moving back and forth between -1 and 1 according to sin( t ) ]
 
 It might look like everything still fits on our one dimensional line, but by introducing time, we've now created a two-dimensional object that comprises the "life" of the moving point. This life is two-dimensional because, to identify any given moment, we have to know _where_ it happened, and _when_ it happened.***
 
 Because this object is two dimensional, we can give it a two dimensional visual representation:
 
-[ graph of sin( t ) from at least 0 to 2*pi ]
+[Figure 2][ graph of sin( t ) from at least 0 to 2*\pi ]
 
 This transformation suggests an important fact: An N-dimensional object is equivalent to an (N-1)-dimensional object that changes through one dimension of time. For the image above, N=2, so that (N-1)=1. The graph above is just a different representation of the moving point we saw before. An (N-1)-dimensional object that moves through time is the same as an N-dimensional object that is "timeless", where all moments of time are visible at once.
 
-We can use the same trick to move from N=2 to N=3 dimensions. That is, a two-dimensional object that varies through time can be represented as a "timeless" three-dimensional object. For example, this two dimensional object with time:
+We can use the same trick to move from N=2 to N=3 dimensions. That is, a two-dimensional object that varies through time can be represented as a "timeless" three-dimensional object. For example, this two dimensional object that changes through time:
 
-[ animation of a square shrinking to a single point ]
+[Figure 3][ animation of sin( t + \theta ) as \theta shifts through at least 2*\pi ]
 
 can be represented as this three-dimensional object:
 
-[ image of a pyramid ]
+[Figure 4][ 3d plot of ( x, y, sin( t + \theta * x ) ) on for 0 < x < 2*\pi ]
 
-The remarkable thing about this interpretation of "dimension" is that it works even we can no longer transform the result into a two-dimensional image. The motion of a three-dimensional object is, in fact, equivalent to a timeless four-dimensional object.**** That observation leads to the next crucial point.
+The remarkable thing about this interpretation of "dimension" is that it works even when we can no longer transform the result into a two-dimensional image. The motion of a three-dimensional object is, in fact, equivalent to a timeless four-dimensional object.**** That observation leads to the next important point.
 
 
 # Perspective and Parallax
 
-In English, we use words like "perspective" or "angle" to describe a single person's experience. We talk about stories having "more than one side", as if an event was a thing in space that you could walk around and observe from different vantage points. Considering these other perspectives can give depth to a complex matter, or reveal facts that might not be visible from a single position.[6]  Put another way, viewing events from at least two perspectives adds dimension.
+In English, we use words like "perspective" or "angle" to describe a single person's experience. We talk about stories having "more than one side", as if an event was a thing in space that you could walk around and observe from different vantage points. Considering other perspectives can give depth to a complex matter, or reveal facts that might not be visible from a single position.[6]  Put another way, viewing events from at least two perspectives adds dimension.
 
-This phenomenon is so well understood in the familiar spatial dimensions that it has a name: parallax.[7] The easiest way to understand parallax is to experience it first-hand. Here's one way: Stare at an object not too far in front of you, and close just one eye, then just the other. You'll notice that when you switch between eyes, things seem to shift slightly to the right, or to the left. That's because your eyes are at different locations in space, and thus see from different angles. With both eyes open, your brain merges the two-dimensional images it receives from each eye, and produces the experience of depth. Thus, it becomes possible to visibly judge not just right-left and up-down dimension, but also a third dimension of near-far.
+This phenomenon is so well understood in the familiar spatial dimensions that it has a name: parallax.[7] The easiest way to understand parallax is to experience it first-hand. Here's one way: Stare at an object not too far in front of you, and close just one eye, then just the other. You'll notice that when you switch between eyes, things seem to shift slightly to the right, or to the left. That's because your eyes are at different locations in space, and so see from different angles. With both eyes open, your brain merges the two-dimensional images it receives from each eye, and produces the experience of depth. Thus, it becomes possible to visibly judge not just right-left and up-down dimension, but also a third dimension of near-far.
 
-If parallax on two dimensions gives rise to the experience of three-dimensional space, what kind of experience would come from parallax on three dimensions? One answer is: The passage of time. While this might seem counter-intuitive, the analogy works perfectly well. We're able to perceive motion exactly because it's possible to remember or record the position of objects in space at different moments. What's more, the record of what has happened has a four dimensional summary, in terms of where the action took place, and when -- three spatial dimensions, plus one dimension of time to reflect change. Assuming that everything you experience takes place in spacetime as such, every episode in your life has a four-dimensional representation. If we could see all of time all at once, your memory could be picked out just by knowing where you were, and when. That is to say, your memories are representations of objets in four-dimensions.
+If parallax on two dimensions gives rise to the experience of three-dimensional space, what kind of experience would come from parallax on three dimensions? One answer is: The passage of time. We're able to perceive motion exactly because it's possible to remember or record the position of objects in space at different moments. That memory has a four dimensional summary, in terms of where the action took place, and when -- three spatial dimensions, plus one dimension of time to reflect change. Assuming that everything you experience takes place in spacetime as such, every episode in your life has a four-dimensional representation. If we could see all of spacetime at once, any given memory you have could be picked out just by knowing where you were, and when. That is to say, your memories are representations of objects in four-dimensions.
 
-That's not to say that memories are perfect. Sometimes they're mistaken. Sometimes they have gaps. Sometimes, even, they can be wholly fabricated. But, as long they happen in space and time, they can be located in some four-dimensional space. In that respect, memories are not so different from stories in general. Stories have fictitious elements, but they usually resemble real events in some way. Stories might be fantastical, or logically inconsistent, but they always incorporate time ("long ago...") and place ("...in a kingdom far away..."). And, just like memories, stories can change over time. Change through time adds a dimension, and so stories, when they're told, reveal five dimensions.
+That's not to say that memories are perfect. Sometimes they're mistaken. Sometimes they have gaps. Sometimes, even, they can be wholly fabricated. But, as long they happen in space and time, they can be located by some four-dimensional coordinates. In that respect, memories are not so different from stories in general. Stories have fictitious elements, but they usually resemble real events in some way. Stories might be fantastical, or logically inconsistent, but they always incorporate time ("long ago...") and place ("...in a land far away..."). And, just like memories, stories can change over time. Change through time adds a dimension, and so stories, when they're told, reveal five dimensions.
 
 
 # Dimension of the Possible
 
-Space has three dimensions, events have four, and storytelling moves through a fifth. The 'telling' in 'storytelling' is important: stories can and do change with time or perspective, and it's the resulting parallax that adds a fifth dimension. The fact that recountings of past events can and do change is well-supported by emprical evidence across many domains[8]. If that still seems abstract, it's worth considering what storytelling might look like in lower dimensions, where we can visualize the result.
+Space has three dimensions, events have four, and storytelling moves through a fifth. The 'telling' in 'storytelling' is important: stories can and do change with time or perspective, and it's the resulting parallax that adds a fifth dimension. It's well known that recountings, both historical and fictional, change with time and telling. If the idea of a fifth dimension still seems abstract, it's worth considering what very simple storytelling might look like in lower dimensions, where we can visualize the result.
 
 In the one-dimensional case that we started with, time unfolds into a two-dimensional figure like so:
 
-[ same image of sin( t ) ]
+[ reproduce Figure 2 ]
 
-What would happen if we were to copy this graph over and over again, except with small changes? This often happens as a story is told and retold. Think of the curve as the story of "what happened to our point in one-dimension", and imagine that every time the story gets "told", the high- and low-points of the wave edge a little closer to zero. We would get a series of curves looking something like this:
+What would happen if we were to copy this history over and over again, except with small changes? This often happens as a story is told and retold. Think of the curve as the story of "what happened to our one-dimensional point", and imagine that every time the story gets "told", the high- and low-points of the wave edge a little closer to zero. We would get a series of curves looking something like this:
 
-[ image of the curves (1 / x ) * sin( t ) for some suitable values of x > 1 ]
+[ Figure 5 ][ image of the curves ( 1 / x ) * sin( t ) for some suitable values of x > 1 ]
 
 There are now many different versions of the story. This sequence of tellings of the original "story" might go something like this:
 
@@ -78,15 +78,15 @@ And then:
 
 Each curve tells one version of what originally happened in one dimension. Each story, by itself, exists in two, since it incorporates a dimension of time. When the story is told over and over, the telling and re-telling occupies a third. All together, the tellings create a plane in three dimensions:
 
-[ plot of ( 1 / x ) * sin( y ) in same domain, range as in preceding figure ]
+[ Figure 6 ][ 3d plot of ( x, y, ( 1 / y ) * sin( x ) ) in the same domain, range as Figure 5 ]
 
-Although we occupy three dimensions of space, instead of just one, the notion of multiple analogous arcs approximates what happens when we encounter five dimensional things in social and cultural life. Some familiar, real examples:
+Although we occupy three dimensions of space, instead of just one, the notion of multiple analogous arcs approximates what happens when we encounter five dimensional things in social and cultural life. Some familiar, real examples of multiple narrative arcs:
 
 - A friend tells you the same sensational story over and over, and the details become more exaggerrated each time.
 - Two friends experience a bitter falling-out. Their stories overlap, but don't agree on the unflattering details of what really happened.
 - Fanfiction authors re-imagine the stories and characters of their chosen canon.
 - Someone posts a regrettable rant, then deletes it, and then denies that it ever happened.
-- Political advocates articulate radically different visions of a nation's future.
+- Political advocates articulate radically different visions of a nation's future, by appealing to the stories of its past.
 
 Each of these examples includes some arc of events -- whether past, or future, or wholly fictional -- repeated with variations. The repetition, and the change (or lack thereof) unfold into a plane of "what might have been" or "what might be possible."
 
@@ -95,7 +95,7 @@ Each of these examples includes some arc of events -- whether past, or future, o
 
 This is a troubled time. That's not a new or original sentiment, but I think most of us feel it. The feelings are not all the same, but they're all the shadow of some thing that doesn't quite fit into the vision of one life. It's easy to look at that shadow as something ominous, as some darkness into which time moves us inexorably forward. It is easy to forget there are other lines of movement.
 
-What's strange about these other lines is that they require the use of imagination, and talk. It makes them seem ephemeral, or impractical. Following that same line of thought, I almost didn't bother to write or publish any of this. The idea (as noted below) is not quite original, and a disciplined theorist could find and exploit numerous conceptual weaknesses in the arguments above.[9] Is there even anything here worth saying
+What's strange about these other lines is that they require the use of imagination, and talk. It makes them seem ephemeral, or impractical. Following that same line of thought, I almost didn't bother to write or publish any of this. The idea (as noted below) is not quite original, and a disciplined theorist could find and exploit numerous conceptual weaknesses in the arguments above.[9] Is there even anything here worth saying?
 
 I think there is, and it's this:
 
@@ -103,27 +103,23 @@ There is change other than time.
 
 In the abstract examples above, I used the notion of "time" almost interchangeably with that of "change". Of course, things do change with time. But time is not all the change there is. As we move from four-dimensional arcs of event to five-dimensional arcs of telling, two distinct notions of change emerge: the first is the change that drives an individual story, and the second is the change that drives the metamorphosis of one story into another. The first can justifiably be called "time". But what is the second?
 
-I think we could justifiably call it "ideation", as in, "the formation of an idea". But really, that's nothing other than a round-about, technical-sounding way of saying "imagination". Maybe it's easy to recoil from that word. We've come to regard imagination as idle daydreams and indulgent fantasies. Sometimes it is -- but that's not all it is. In the same way that time inexorably changes things, so does imagination. When you dare to imagine something different, you literally move your self, and whatever parts of the world you touch, onto a different arc. You enact change, independent of time. Ideas make possibilities.
+I think we could justifiably call it "ideation", as in, "the formation of an idea". But really, that's nothing other than a round-about, technical-sounding way of saying "imagination". Personally, I find it easy to recoil from that word. We've come to regard imagination as idle daydreams and indulgent fantasies. Sometimes it is -- but that's not all it is. In the same way that time inexorably changes things, so does imagination. Imagination may not be sufficient to create something new, but it is necessary. When you dare to imagine something different, you literally move your self, and whatever parts of the world you touch, onto a different arc. You enact change, independent of time. Ideas make possibilities.
 
-Stories don't move time forward. Stories move time sideways. They don't change what is. They do change what could be. Hearing and telling them adds a dimension to everything.
+Stories don't move time forward. Stories move time sideways. They don't change what is. They do change what could be. Stories matter. Hearing and telling them adds a dimension to everything.
 
 
-*[ Technically, the ordering of dimensions is completely arbitrary. There is no reason that we couldn't think of time as "the first dimension", and space as the "second, third, and fourth". I've only called storytelling a "fifth" dimension because there are already four well-known others. ]
+[1] Technically, the ordering of dimensions is completely arbitrary. There is no reason that we couldn't think of time as "the first dimension", and space as the "second, third, and fourth". I've only called storytelling a "fifth" dimension because there are already four well-known others. ]
 
-**[ 'Space' need not mean 'spatial'. The idea of dimensionality can be applied to a surprising number of concepts. One familiar example: colors form a three-dimensional space in their common representation as "red-green-blue" values. ]
+[2] 'Space' need not mean 'spatial'. The idea of dimensionality can be applied to a surprising number of concepts. One familiar example: colors form a three-dimensional space in their common representation as "red-green-blue" values. ]
 
-***[ We can't use just single numbers to uniquely identify because the point could move over the same place twice. ]
+[3] We can't use just single numbers to uniquely identify because the point could move over the same place twice. ]
 
-****[ In a formal mathematical context, this would probably be called a _manifold_, not an "object". For our purposes, though, the meaning is pretty much the same. ]
+[4] In a formal mathematical context, this would probably be called a _manifold_, not an "object". For our purposes, though, the meaning is pretty much the same. ]
 
-*****[ There are a number of strong arguments to be made that subjective experience is much more than just space and time. They even suggest a serious flaw in my whole line of argument, and point to wilder, much more interesting conclusions. However, those arguments would also be vastly harder to make. I've chosen to go ahead with the idea at hand precisely because it raises questions that *do* go in that much more interesting direction, and at least has an attainable conclusion. The flaws in one theory are usually the starting point of a better theory. ]
+[5] Just to be painstakingly clear: I don't mean to suggest that all perspectives are valid or truthful. Ideas that systematically demean, denigrate, or threaten people - for example, racism, sexism, xenophobia, homophobia, transphobia, ableism - may be perspectives, but they are generally bullshit. I might even venture so far as to argue that these are "anti-perspectives": they are usually more concerned with erasing the stories of others than they are with telling their own.
 
-[6][ But, just to be absolutely clear, I don't mean to suggest that all perspectives are valid or truthful. Ideas that systematically demean, denigrate, or threaten others -- racism, sexism, xenophobia, homophobia, transphobia, ableism, just to name a few -- may be perspectives, but they are generally bullshit. I might even venture to argue these as "anti-perspectives": they are usually more concerned with erasing the stories of others than they are with telling their own. ]
+[6][ Again, I am not the first to apply this term this way; it shows up all over literary theory. However, I'm also not a scholar of that field, and candidly, I don't know how to best attribute its usage -- other than to say "it's not me." ]
 
-[7][ Again, I am not the first to apply this term this way; it shows up all over literary theory. However, I'm also not a scholar of that field, and candidly, I don't know how to best attribute its usage -- other than to say "it's not me." ]
-
-[8][ cite some, e.g. in psychology, criminal law, ethnography ]
-
-[9][ Bring it on. ]
+[7][ Bring it on. ]
 
 #[ It's worth noting that the overlap of dimension and narrative has been treated in fiction. Thomas Pynchon alluded to an idea very similar to this one, toward the end of "Against the Day". He envisions it in the form of some sort of movie projector that uses integration as a dimensionality trick to see through time. Phillip Pullman's trilogy, "His Dark Materials", alludes to narrative as a kind of parallel world -- which could be interpreted as dimensionality. Kurt Vonnegut envisions a species of five-dimensional beings who see all of time at once in "Slaughterhouse V". I'm sure an exhaustive bibliography could come up with other related instances. ]
