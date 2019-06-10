@@ -6,7 +6,6 @@ One way to make sense of this fact is to understand stories this way: as a liter
 
 "Stories exist in a fifth dimension" is a claim with a dizzying number of interesting implications. It's also a claim that's highly abstract, and not at all obvious. What I'd like to do here is clarify what that idea means, and give it a basis in concrete fact. I'll start by considering two very large but very familiar things: change, and time.
 
-
 # Adding Dimensions with Time
 
 As used in science and mathematics, "dimension" refers (roughly) to the number of coordinates needed to uniquely identify a point in some space**. By that definition, a one-dimensional space is one in which every single point can be assigned a unique number. Represented visually, a one-dimensional space could be perfectly flattened out into the number line:
@@ -86,6 +85,7 @@ Although we occupy three dimensions of space, instead of just one, the notion of
 - Two friends experience a bitter falling-out. Their stories overlap, but don't agree on the unflattering details of what really happened.
 - Fanfiction authors re-imagine the stories and characters of their chosen canon.
 - Someone posts a regrettable rant, then deletes it, and then denies that it ever happened.
+
 - Political advocates articulate radically different visions of a nation's future, by appealing to the stories of its past.
 
 Each of these examples includes some arc of events -- whether past, or future, or wholly fictional -- repeated with variations. The repetition, and the change (or lack thereof) unfold into a plane of "what might have been" or "what might be possible."
@@ -103,23 +103,28 @@ There is change other than time.
 
 In the abstract examples above, I used the notion of "time" almost interchangeably with that of "change". Of course, things do change with time. But time is not all the change there is. As we move from four-dimensional arcs of event to five-dimensional arcs of telling, two distinct notions of change emerge: the first is the change that drives an individual story, and the second is the change that drives the metamorphosis of one story into another. The first can justifiably be called "time". But what is the second?
 
-I think we could justifiably call it "ideation", as in, "the formation of an idea". But really, that's nothing other than a round-about, technical-sounding way of saying "imagination". Personally, I find it easy to recoil from that word. We've come to regard imagination as idle daydreams and indulgent fantasies. Sometimes it is -- but that's not all it is. In the same way that time inexorably changes things, so does imagination. Imagination may not be sufficient to create something new, but it is necessary. When you dare to imagine something different, you literally move your self, and whatever parts of the world you touch, onto a different arc. You enact change, independent of time. Ideas make possibilities.
+I think we could justifiably call it "ideation", as in, "the formation of an idea". But really, that's nothing other than a round-about, technical-sounding way of saying "imagination". Maybe it's easy to recoil from that word. We've come to regard imagination as idle daydreams and indulgent fantasies. Sometimes it is -- but that's not all it is. In the same way that time inexorably changes things, so does imagination. When you dare to imagine something different, you literally move your self, and whatever parts of the world you touch, onto a different arc. You enact change, independent of time. Ideas make possibilities.
 
-Stories don't move time forward. Stories move time sideways. They don't change what is. They do change what could be. Stories matter. Hearing and telling them adds a dimension to everything.
+Stories don't move time forward. Stories move time sideways. They don't change what is. They do change what could be. Hearing and telling them adds a dimension to everything.
 
 
-[1] Technically, the ordering of dimensions is completely arbitrary. There is no reason that we couldn't think of time as "the first dimension", and space as the "second, third, and fourth". I've only called storytelling a "fifth" dimension because there are already four well-known others. ]
+*[ Technically, the ordering of dimensions is completely arbitrary. There is no reason that we couldn't think of time as "the first dimension", and space as the "second, third, and fourth". I've only called storytelling a "fifth" dimension because there are already four well-known others. ]
 
-[2] 'Space' need not mean 'spatial'. The idea of dimensionality can be applied to a surprising number of concepts. One familiar example: colors form a three-dimensional space in their common representation as "red-green-blue" values. ]
+**[ 'Space' need not mean 'spatial'. The idea of dimensionality can be applied to a surprising number of concepts. One familiar example: colors form a three-dimensional space in their common representation as "red-green-blue" values. ]
 
-[3] We can't use just single numbers to uniquely identify because the point could move over the same place twice. ]
+***[ We can't use just single numbers to uniquely identify because the point could move over the same place twice. ]
 
-[4] In a formal mathematical context, this would probably be called a _manifold_, not an "object". For our purposes, though, the meaning is pretty much the same. ]
+****[ In a formal mathematical context, this would probably be called a _manifold_, not an "object". For our purposes, though, the meaning is pretty much the same. ]
 
-[5] Just to be painstakingly clear: I don't mean to suggest that all perspectives are valid or truthful. Ideas that systematically demean, denigrate, or threaten people - for example, racism, sexism, xenophobia, homophobia, transphobia, ableism - may be perspectives, but they are generally bullshit. I might even venture so far as to argue that these are "anti-perspectives": they are usually more concerned with erasing the stories of others than they are with telling their own.
+*****[ There are a number of strong arguments to be made that subjective experience is much more than just space and time. They even suggest a serious flaw in my whole line of argument, and point to wilder, much more interesting conclusions. However, those arguments would also be vastly harder to make. I've chosen to go ahead with the idea at hand precisely because it raises questions that *do* go in that much more interesting direction, and at least has an attainable conclusion. The flaws in one theory are usually the starting point of a better theory. ]
 
-[6][ Again, I am not the first to apply this term this way; it shows up all over literary theory. However, I'm also not a scholar of that field, and candidly, I don't know how to best attribute its usage -- other than to say "it's not me." ]
+[6][ But, just to be absolutely clear, I don't mean to suggest that all perspectives are valid or truthful. Ideas that systematically demean, denigrate, or threaten others -- racism, sexism, xenophobia, homophobia, transphobia, ableism, just to name a few -- may be perspectives, but they are generally bullshit. I might even venture to argue these as "anti-perspectives": they are usually more concerned with erasing the stories of others than they are with telling their own. ]
 
-[7][ Bring it on. ]
+[7][ Again, I am not the first to apply this term this way; it shows up all over literary theory. However, I'm also not a scholar of that field, and candidly, I don't know how to best attribute its usage -- other than to say "it's not me." ]
+
+[8][ cite some, e.g. in psychology, criminal law, ethnography ]
+
+[9][ Bring it on. ]
+>>>>>>> 1dc28249607917d652bc9343dbcb685eadffe864
 
 #[ It's worth noting that the overlap of dimension and narrative has been treated in fiction. Thomas Pynchon alluded to an idea very similar to this one, toward the end of "Against the Day". He envisions it in the form of some sort of movie projector that uses integration as a dimensionality trick to see through time. Phillip Pullman's trilogy, "His Dark Materials", alludes to narrative as a kind of parallel world -- which could be interpreted as dimensionality. Kurt Vonnegut envisions a species of five-dimensional beings who see all of time at once in "Slaughterhouse V". I'm sure an exhaustive bibliography could come up with other related instances. ]
